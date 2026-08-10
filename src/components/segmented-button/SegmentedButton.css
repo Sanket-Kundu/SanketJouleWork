@@ -1,0 +1,29 @@
+/* Divider between adjacent unselected items */
+.fx-segmented-button > [role="option"]::before {
+  content: '';
+  position: absolute;
+  left: -0.15625rem; /* centers 1px line in 4px gap */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0.0625rem;
+  background: var(--border-secondary);
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 150ms ease;
+}
+
+.fx-segmented-button[data-size="Large"] > [role="option"]::before {
+  height: 2rem; /* 32px */
+}
+.fx-segmented-button[data-size="Medium"] > [role="option"]::before {
+  height: 1.5rem; /* 24px */
+}
+.fx-segmented-button[data-size="Small"] > [role="option"]::before {
+  height: 1rem; /* 16px */
+}
+
+.fx-segmented-button > [role="option"]:first-child::before,
+.fx-segmented-button > [role="option"][aria-selected="true"]::before,
+.fx-segmented-button > [role="option"][aria-selected="true"] + [role="option"]::before {
+  opacity: 0;
+}

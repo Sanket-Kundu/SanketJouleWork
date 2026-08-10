@@ -1,0 +1,688 @@
+/*
+ * Sapphire Tokens — Default values for Light and Dark themes.
+ *
+ * Import this file to get the standard Sapphire look out of the box.
+ * Consumers can override any token by defining it in their own CSS.
+ *
+ * Usage:
+ *   @import "@sap-ui/fx-components/tokens.css";
+ */
+
+/* Sapphire Light Theme */
+:root {
+	/* ============================================
+	 * Base shadcn tokens - mapped to Sapphire tokens
+	 * ============================================ */
+	--background: #FDFEFF;
+	--foreground: #0B0C0F;
+	--card: #FDFEFF;
+	--card-foreground: #0B0C0F;
+	--popover: #FDFEFF;
+	--popover-foreground: #0B0C0F;
+	--primary: #0070F2;
+	--primary-foreground: #FFFFFF;
+	--secondary: #F8F9FA;
+	--secondary-foreground: #353C4A;
+	--muted: #F8F9FA;
+	--muted-foreground: #636D83;
+	--accent: #F8F9FA;
+	--accent-foreground: #2C313A;
+	--destructive: var(--negative);
+	--destructive-foreground: #FFFFFF;
+	--border: #E6E7EA;
+	--input: #E6E7EA;
+	--ring: #0057D2;
+	--radius: 0.5rem;
+	--negative: #C72F2B;
+	--warning: #A95A00;
+	--info: #0064D9;
+	--positive: #007B3E;
+	--negative-bg: #F6E6E7;
+	--positive-bg: #DFEFE6;
+	--warning-bg: #FEF5C8;
+	--warning-bg-transparent: rgba(254,245,200,0.00); /* Figma: Warning-Bg @ 0% opacity */
+	--info-bg: #E2E9F8;
+	--negative-border: rgba(199, 47, 43, 0.3);
+	--positive-border: rgba(0, 123, 62, 0.3);
+	--info-border: rgba(0, 100, 217, 0.3);
+	--warning-border: rgba(169, 90, 0, 0.3);
+	--chart-1: #168eff;  /* sapChart_OrderedColor_1 - Bright Blue */
+	--chart-2: #df1278;  /* sapChart_OrderedColor_4 - Pink */
+	--chart-3: #8b47d7;  /* sapChart_OrderedColor_5 - Purple */
+	--chart-4: #049f9a;  /* sapChart_OrderedColor_6 - Teal */
+	--chart-5: #5d36ff;  /* sapChart_OrderedColor_11 - Blue Violet */
+	--chart-6: #da6c6c;  /* sapChart_OrderedColor_10 - Coral/Salmon */
+	--chart-7: #cc00dc;  /* sapChart_OrderedColor_8 - Magenta */
+	--chart-8: #0070f2;  /* sapChart_OrderedColor_7 - Blue */
+	--chart-9: #a68a5b;  /* sapChart_OrderedColor_12 - Tan/Brown */
+	--chart-10: #798c77; /* sapChart_OrderedColor_9 - Sage Green */
+	--chart-11: #c87b00; /* sapChart_OrderedColor_2 - Orange */
+	--chart-12: #75980b; /* sapChart_OrderedColor_3 - Olive Green */
+
+	/* ============================================
+	 * Sapphire Base Tokens
+	 * ============================================ */
+
+	/* Brand */
+	--color-brand-blue: var(--primary);
+	--color-brand-purple: #5D36FF;
+
+	/* Specific / Brand */
+	--color-brand-blue-selected: #E5ECF5;
+	--color-brand-blue-toggle: #D6E1F0;
+	--color-chrome-bg-light: #F8F9FA;
+	--color-purple-indigo-new: #8080FF;
+	--joule-input-gradient-blue: #4295FF; /* Figma: foundation color, same in both themes */
+	--color-canvas-gradient: #F2F3F6;
+	--color-joule-logo-1: #BA79EF;
+	--color-joule-logo-2: #8A48E6;
+
+	/* Neutrals */
+	--color-neutral-50: #FDFEFF;
+	--color-neutral-100: #F0F2F4;
+	--color-neutral-200: #E6E7EA;
+	--color-neutral-300: #B5BCCA;
+	--color-neutral-400: #7C879C;
+	--color-neutral-500: #636D83;
+	--color-neutral-600: #353C4A;
+	--color-neutral-700: #2C313A;
+	--color-neutral-800: #171A20;
+	--color-neutral-900: #0B0C0F;
+	--color-neutral-950: #040511;
+
+	/* Shades Purple */
+	--color-purple-50: #F1ECFF;
+	--color-purple-100: #E2D8FF;
+	--color-purple-200: #D3B6FF;
+	--color-purple-300: #B894FF;
+	--color-purple-400: #9B76FF;
+	--color-purple-500: #7858FF;
+	--color-purple-600: #5D36FF;
+	--color-purple-700: #470CED;
+	--color-purple-800: #2C13AD;
+	--color-purple-900: #1C0C6E;
+	--color-purple-950: #0E0637;
+
+	/* Shades Blue */
+	--color-blue-50: #EBF8FF;
+	--color-blue-100: #D1EFFF;
+	--color-blue-200: #A6E0FF;
+	--color-blue-300: #89D1FF;
+	--color-blue-400: #4DB1FF;
+	--color-blue-500: #1B90FF;
+	--color-blue-600: #0070F2;
+	--color-blue-700: #0057D2;
+	--color-blue-800: #0040B0;
+	--color-blue-900: #002A86;
+	--color-blue-950: #00144A;
+
+	/* Spacing scale (theme-independent) */
+	--spacing-null: 0;
+	--spacing-4xs: 2px;
+	--spacing-3xs: 4px;
+	--spacing-2xs: 8px;
+	--spacing-xs: 12px;
+	--spacing-s: 16px;
+	--spacing-m: 20px;
+	--spacing-l: 24px;
+	--spacing-xl: 32px;
+	--spacing-2xl: 36px;
+	--spacing-3xl: 40px;
+	--spacing-4xl: 48px;
+	--spacing-5xl: 64px;
+	--spacing-6xl: 80px;
+	--spacing-7xl: 96px;
+
+	/* Border Radius (theme-independent) */
+	--radius-null: 0;
+	--radius-s: 4px;
+	--radius-m: 8px;
+	--radius-l: 16px;
+	--radius-xl: 32px;
+
+	/* Border Width (theme-independent) */
+	--border-width-s: 1px;
+	--border-width-m: 2px;
+
+	/* Icon Sizes (theme-independent) */
+	--size-s: 16px;
+	--size-m: 20px;
+	--size-l: 24px;
+
+	/* Opacity (theme-independent) */
+	--disabled-opacity: 40%;
+
+	/* ============================================
+	 * Sapphire Additional Tokens - (aliases → shadcn)
+	 * ============================================ */
+
+	/* Sapphire tokens (aliases → shadcn vars) */
+	--text-primary: var(--foreground);
+	--text-secondary: var(--secondary-foreground);
+	--text-tertiary: var(--color-neutral-500);
+	--text-disabled: var(--color-neutral-300);
+	--text-accent: var(--color-blue-700);
+	--text-accent-2: var(--color-brand-purple);
+	--text-accent-3: var(--color-brand-purple);
+	--text-on-surface: var(--primary-foreground);
+
+	--background-primary: var(--background);
+	--background-secondary: var(--secondary);
+	--background-tertiary: var(--color-neutral-100);
+	--background-quaternary: var(--color-neutral-200);
+	--canvas-primary: var(--color-neutral-50);
+	--card-bg-primary: var(--card);
+	--card-bg-secondary: #ffffff /* manually changed, figma label is "color-neutral-100" but hex is #FFFFFF */;
+	--card-bg-secondary-hover: var(--color-neutral-200);
+
+	--border-primary: var(--border);
+	--border-secondary: var(--color-neutral-300); /* manually added, used in the figma (Input), but not part of the color palettes */
+	--border-active: var(--color-neutral-400);
+	--border-accent: var(--ring);
+	--list-header-border: #A8B3BD; /* Figma: sapList_HeaderBorderColor */
+
+	/* Chrome */
+	--chrome-bg-primary: var(--color-chrome-bg-light);
+	--chrome-fg-primary: #354A5F;
+	--chrome-bg-tertiary: var(--color-chrome-bg-light);
+	--chrome-button-fg-default: var(--color-neutral-950);
+	--chrome-button-bg-selected: var(--color-brand-blue-selected);
+	--chrome-button-fg-selected: var(--color-blue-700);
+	--chrome-button-bg-default: var(--primary-foreground);
+
+	/* Buttons */
+	--button-fg-disabled: var(--color-neutral-400);
+	--button-bg-disabled: var(--color-neutral-200);
+	/* TODO: button-joule-hover-bg is a placeholder — replace with public token once provided by design */
+	--button-joule-hover-bg: #EAEAF0;
+
+	/* Tag */
+	--tag-border: #bcc3ca;
+	--tag-accent-bg: #ded3ff;
+	--tag-hover-bg: rgba(142,115,255,0.1);
+	--tag-active-bg: rgba(142,115,255,0.15);
+	--tag-focus-border: var(--color-brand-purple);
+
+	/* Status Tag — "Active" design (light: purple tint, dark: deep purple) */
+	--status-tag-active-bg: var(--color-purple-100);   /* #E2D8FF */
+	--status-tag-active-text: var(--color-purple-700);  /* #470CED */
+
+	/* Prompt Input (Joule purple scale - themable) */
+	--prompt-accent: var(--color-purple-500);
+	--prompt-accent-muted: var(--color-purple-400);
+	--prompt-accent-subtle: var(--color-purple-300);
+
+	/* ============================================
+	 * Figma "Theme Sapphire" tokens (2026-04-16)
+	 * Source: FX UI Kit, variable collection "Theme Sapphire"
+	 * ============================================ */
+
+	/* Brand — NEW group, no previous equivalent */
+	--brand-background: var(--primary); /* NEW — #0070F2 */
+	--brand-hover-background: var(--color-blue-700); /* NEW — #0057D2 */
+	--brand-pressed-background: var(--color-blue-800); /* NEW — #0040B0 */
+	--brand-foreground: var(--color-blue-700); /* NEW — #0057D2 */
+	--brand-pressed-foreground: var(--color-blue-800); /* NEW — #0040B0 */
+	--brand-selected-background: var(--color-brand-blue-selected);
+	--brand-selected-hover-background: var(--color-brand-blue-toggle);
+	--brand-toggle-background: var(--color-brand-blue-toggle);
+	--brand-toggle-hover-background: var(--brand-selected-background); /* Not in FX-UI-Kit, kept for ToggleButton compat */
+	--brand-gradient-1: var(--canvas-primary); /* Figma: → Surface/canvas-primary */
+	--brand-gradient-2: #FFFFFF; /* Figma: Neutrals/White */
+	--brand-gradient-3: var(--shell-bg-primary); /* Figma: → Shell/shell-bg-primary */
+	--brand-gradient-4: rgba(248, 249, 250, 0.80); /* Figma: Chrome-Bg-Light @ 80% */
+	--brand-gradient-5: rgba(248, 249, 250, 0.20); /* Figma: Chrome-Bg-Light @ 20% */
+	--brand-gradient-6: rgba(255, 255, 255, 0.00); /* Figma: White @ 0% */
+
+	/* Joule — NEW group, no previous equivalent */
+	--joule-background: var(--color-brand-purple); /* NEW — #5D36FF */
+	--joule-background-light: var(--color-purple-100); /* NEW — #E2D8FF */
+	--joule-background-area: var(--color-purple-50); /* Figma: Purples/50 */
+	--joule-background-area-2: var(--color-purple-50);
+	--joule-hover-background: var(--color-purple-700); /* NEW — #470CED */
+	--joule-hover-background-2: var(--color-purple-700); /* NEW — #470CED */
+	--joule-pressed-background: var(--color-purple-800); /* NEW — #2C13AD */
+	--joule-foreground: var(--color-brand-purple); /* NEW — #5D36FF */
+	--joule-pressed-foreground: var(--color-purple-800); /* NEW — #2C13AD */
+	--joule-logo-1: var(--color-purple-500); /* Figma: Purples/500 */
+	--joule-logo-2: var(--color-purple-900); /* Figma: Purples/900 */
+	--joule-icons: var(--color-purple-700);
+	--joule-gradient-color-1: var(--color-joule-logo-1);
+	--joule-gradient-color-2: var(--color-joule-logo-2);
+	--joule-gradient-color-3: var(--color-purple-700);
+	--joule-gradient-color-4: var(--color-purple-800);
+	--joule-gradient-foreground: var(--color-neutral-100);
+
+	/* Surface — existing tokens, adding new ones */
+	--card-bg-primary-selected: #FFFFFF; /* NEW — no previous equivalent */
+
+	/* Border — existing tokens, adding new ones */
+	--border-focus: var(--color-blue-800); /* NEW — #0040B0 */
+	--border-focus-neutral: var(--color-neutral-600); /* NEW — #353C4A */
+	--border-joule: var(--color-purple-800); /* NEW — #2C13AD */
+	--border-area: var(--color-purple-300); /* Figma: Purples/300 */
+	--border-toggle: var(--color-brand-blue-toggle);
+
+	/* Shell — RENAMED from "chrome-*", values identical */
+	--shell-fg-primary: var(--chrome-fg-primary); /* RENAMED — was --chrome-fg-primary, same value #354A5F */
+	--shell-bg-primary: var(--chrome-bg-primary); /* RENAMED — was --chrome-bg-primary, same value */
+	--shell-button-fg-default: var(--chrome-button-fg-default); /* RENAMED — was --chrome-button-fg-default, same value */
+	--shell-button-bg-selected: var(--chrome-button-bg-selected); /* RENAMED — was --chrome-button-bg-selected, same value #E5ECF5 */
+	--shell-button-fg-selected: var(--chrome-button-fg-selected); /* RENAMED — was --chrome-button-fg-selected, same value */
+
+	/* Neutral — NEW group, no previous equivalent */
+	--neutral-background-white: #FFFFFF; /* NEW */
+	--neutral-background-grey: var(--color-neutral-300); /* NEW — #B5BCCA */
+	--neutral-hover-background: rgba(11, 12, 15, 0.05); /* Figma: Neutrals/900 @ 5% opacity */
+	--neutral-hover-background-2: var(--color-neutral-100); /* NEW — #F0F2F4 */
+	--neutral-pressed-background: var(--color-neutral-200); /* NEW — #E6E7EA */
+	--neutral-pressed-background-2: var(--color-neutral-200); /* NEW — #E6E7EA */
+	--neutral-foreground-white: #FFFFFF; /* NEW */
+	--neutral-foreground-black: var(--foreground); /* NEW — #0B0C0F */
+	--neutral-foreground-muted: var(--color-neutral-500); /* NEW — #636D83 */
+	--neutral-foreground-muted-pressed: var(--color-neutral-600); /* NEW — #353C4A */
+	--neutral-overlay: rgba(0,0,0,0.20); /* Figma: Neutral overlay */
+
+	/* ============================================
+	 * Accent Colors — Figma "Theme Sapphire" (2026-04-16)
+	 * ============================================ */
+	--accent-1: #A45D00;
+	--accent-bg-1: #FFF3B8;
+	--accent-2: #AA0808;
+	--accent-bg-2: #FFD0E7;
+	--accent-3: #BA066C;
+	--accent-bg-3: #FFDBE7;
+	--accent-4: #A100C2;
+	--accent-bg-4: #FFDCF3;
+	--accent-5: #552CFF;
+	--accent-bg-5: #DED3FF;
+	--accent-6: #0057D2;
+	--accent-bg-6: #D1EFFF;
+	--accent-7: #046C7A;
+	--accent-bg-7: #C2FCEE;
+	--accent-8: #256F3A;
+	--accent-bg-8: #EBF5CB;
+	--accent-9: #6C32A9;
+	--accent-bg-9: #DDCCF0;
+	--accent-10: #556B82;
+	--accent-bg-10: #EAECEE;
+
+	/* ============================================
+	 * Illustrative Colors — Figma "Theme Sapphire" (2026-04-16)
+	 * ============================================ */
+	--illustrative-1: #9B015D;
+	--illustrative-2: #56BDFF;
+	--illustrative-3: #FF7F4C;
+	--illustrative-4: #00144A;
+	--illustrative-5: #A9B4BE;
+	--illustrative-6: #D5DADD;
+	--illustrative-7: #DBF1FF;
+	--illustrative-8: #FFFFFF;
+	--illustrative-9: #0899A7;
+	--illustrative-10: #DBF1FF;
+	--illustrative-11: #DF1278;
+	--illustrative-12: #00A800;
+	--illustrative-13: #0070F2;
+	--illustrative-14: #0040B0;
+	--illustrative-15: #C35500;
+	--illustrative-16: #8D2A00;
+	--illustrative-17: #046C7C;
+	--illustrative-18: #BCE5FF;
+	--illustrative-19: #A3DBFF;
+	--illustrative-20: #89D1FF;
+	--illustrative-21: #1B90FF;
+	--illustrative-22: #00144A;
+	--illustrative-23: #D20A0A;
+	--illustrative-24: #FFB2D2;
+	--illustrative-25: #FFEAF4;
+	--illustrative-26: #FFDF72;
+	--illustrative-27: #FFF8D6;
+	--illustrative-28: #A93E00;
+	--illustrative-29: #450B00;
+	--illustrative-30: #340800;
+	--illustrative-31: #FFAB92;
+
+	/* ============================================
+	 * Typography — Figma Sapphire Typescale
+	 * (same values in light and dark themes)
+	 * ============================================ */
+	--typo-heading1-size: 56px;
+	--typo-heading1-line-height: 64px;
+	--typo-heading1-weight: 300;
+
+	--typo-heading2-size: 40px;
+	--typo-heading2-line-height: 48px;
+	--typo-heading2-weight: 400;
+
+	--typo-heading3-size: 32px;
+	--typo-heading3-line-height: 40px;
+	--typo-heading3-weight: 400;
+
+	--typo-heading4-strong-size: 20px;
+	--typo-heading4-strong-line-height: 28px;
+	--typo-heading4-strong-weight: 600;
+
+	--typo-heading4-size: 20px;
+	--typo-heading4-line-height: 28px;
+	--typo-heading4-weight: 400;
+
+	--typo-title-strong-size: 16px;
+	--typo-title-strong-line-height: 24px;
+	--typo-title-strong-weight: 600;
+
+	--typo-title-size: 16px;
+	--typo-title-line-height: 24px;
+	--typo-title-weight: 400;
+
+	--typo-body-italic-size: 16px;
+	--typo-body-italic-line-height: 22px;
+	--typo-body-italic-weight: 400;
+
+	--typo-body-size: 14px;
+	--typo-body-line-height: 20px;
+	--typo-body-weight: 400;
+
+	--typo-body-strong-size: 14px;
+	--typo-body-strong-line-height: 20px;
+	--typo-body-strong-weight: 600;
+
+	--typo-caption-size: 12px;
+	--typo-caption-line-height: 16px;
+	--typo-caption-weight: 400;
+
+	--typo-caption-mono-size: 12px;
+	--typo-caption-mono-line-height: auto;
+	--typo-caption-mono-weight: 400;
+	--typo-caption-mono-tracking: -0.5px;
+}
+
+/* Sapphire Dark Theme */
+.theme-dark, .dark {
+	/* ============================================
+	 * Base shadcn tokens - mapped to Sapphire tokens
+	 * ============================================ */
+	--background: #0B0C0F;
+	--foreground: #F0F2F4;
+	--card: #0B0C0F;
+	--card-foreground: #F0F2F4;
+	--popover: #0B0C0F;
+	--popover-foreground: #F0F2F4;
+	--primary: #1B90FF;
+	--primary-foreground: #000000;
+	--secondary: #0B0C0F;
+	--secondary-foreground: #B5BCCA;
+	--muted: #0B0C0F;
+	--muted-foreground: #636D83;
+	--accent: #171A20;
+	--accent-foreground: #B5BCCA;
+	--destructive: var(--negative);
+	--destructive-foreground: #FFFFFF;
+	--border: #2C313A;
+	--input: #2C313A;
+	--ring: #4DB1FF;
+	--radius: 0.5rem;
+	--negative: #FF6966;
+	--warning: #FFA600;
+	--info: #47A7FF;
+	--positive: #0DC043;
+	--negative-bg: #3C1618;
+	--positive-bg: #162C20;
+	--warning-bg: #413601;
+	--warning-bg-transparent: rgba(65,54,1,0.00); /* Figma: Warning-Bg @ 0% opacity (dark) */
+	--info-bg: #102942;
+	--negative-border: rgba(255, 105, 102, 0.3);
+	--positive-border: rgba(13, 192, 67, 0.3);
+	--info-border: rgba(71, 167, 255, 0.3);
+	--warning-border: rgba(255, 166, 0, 0.3);
+	--chart-1: #168EFF;  /* sapChart_OrderedColor_1 - Blue */
+	--chart-2: #FA4F96;  /* sapChart_OrderedColor_4 - Pink */
+	--chart-3: #8B47D7;  /* sapChart_OrderedColor_5 - Purple */
+	--chart-4: #049F9A;  /* sapChart_OrderedColor_6 - Teal */
+	--chart-5: #7858FF;  /* sapChart_OrderedColor_11 - Violet */
+	--chart-6: #F28585;  /* sapChart_OrderedColor_10 - Red */
+	--chart-7: #F31DED;  /* sapChart_OrderedColor_8 - Magenta */
+	--chart-8: #0070F2;  /* sapChart_OrderedColor_7 - Bright Blue */
+	--chart-9: #A68A5B;  /* sapChart_OrderedColor_12 - Brown */
+	--chart-10: #8EA18C; /* sapChart_OrderedColor_9 - Sage */
+	--chart-11: #F2A634; /* sapChart_OrderedColor_2 - Orange */
+	--chart-12: #B4CE35; /* sapChart_OrderedColor_3 - Green */
+
+	/* Sapphire tokens (aliases → shadcn vars) */
+	--text-primary: var(--foreground);
+	--text-secondary: var(--secondary-foreground);
+	--text-tertiary: var(--color-neutral-400);
+	--text-disabled: var(--color-neutral-600);
+	--text-accent: var(--color-blue-400);
+	--text-accent-2: var(--color-purple-500);
+	--text-accent-3: var(--color-neutral-300);
+	--text-on-surface: var(--primary-foreground);
+
+	--background-primary: var(--background);
+	--background-secondary: var(--color-neutral-800); /* Figma: Neutrals/800 #171A20 */
+	--background-tertiary: var(--color-neutral-700); /* Figma: Neutrals/700 #2C313A */
+	--background-quaternary: var(--color-neutral-600); /* Figma: Neutrals/600 #353C4A */
+	--canvas-primary: var(--background);
+	--card-bg-primary: var(--card);
+	--card-bg-secondary: var(--color-neutral-800);
+	--card-bg-secondary-hover: var(--color-neutral-700);
+
+	--border-primary: var(--border);
+	--border-secondary: var(--color-neutral-600);
+	--border-active: var(--color-neutral-500);
+	--border-accent: var(--ring);
+	--list-header-border: var(--color-neutral-400); /* Figma: sapList_HeaderBorderColor (dark) */
+
+	/* Chrome */
+	--chrome-bg-primary: var(--color-neutral-800);
+	--chrome-fg-primary: #354A5F;
+	--chrome-bg-tertiary: var(--color-neutral-800);
+	--chrome-button-fg-default: var(--color-neutral-100);
+	--chrome-button-bg-selected: var(--color-neutral-700);
+	--chrome-button-fg-selected: var(--color-blue-400);
+	--chrome-button-bg-default: var(--chrome-bg-primary);
+
+	/* Buttons */
+	--button-fg-disabled: var(--color-neutral-600);
+	--button-bg-disabled: var(--color-neutral-800);
+	/* TODO: button-joule-hover-bg is a placeholder — replace with public token once provided by design */
+	--button-joule-hover-bg: #2A2A35;
+
+	/* Tag */
+	--tag-border: var(--color-neutral-600);
+	--tag-accent-bg: rgba(93,54,255,0.25);
+	--tag-hover-bg: rgba(142,115,255,0.15);
+	--tag-active-bg: rgba(142,115,255,0.2);
+	--tag-focus-border: var(--color-purple-400);
+
+	/* Status Tag — "Active" design (dark: deep purple bg, light purple text) */
+	--status-tag-active-bg: var(--color-purple-800);   /* #2C13AD */
+	--status-tag-active-text: var(--color-purple-100);  /* #E2D8FF */
+
+	/* Prompt Input (Joule purple scale - themable) */
+	--prompt-accent: var(--color-purple-300);
+	--prompt-accent-muted: var(--color-purple-400);
+	--prompt-accent-subtle: var(--color-purple-500);
+
+	/* ============================================
+	 * Figma "Theme Sapphire" tokens (2026-04-16)
+	 * Source: FX UI Kit, variable collection "Theme Sapphire"
+	 * ============================================ */
+
+	/* Brand — NEW group, no previous equivalent */
+	--brand-background: #0070F2; /* NEW — same as light (Blues/600-Base) */
+	--brand-hover-background: var(--color-blue-500); /* NEW — #1B90FF */
+	--brand-pressed-background: var(--color-blue-400); /* NEW — #4DB1FF */
+	--brand-foreground: var(--color-blue-500); /* NEW — #1B90FF */
+	--brand-pressed-foreground: var(--color-blue-400); /* NEW — #4DB1FF */
+	--brand-selected-background: var(--color-neutral-700); /* Figma: Neutrals/700 #2C313A */
+	--brand-selected-hover-background: var(--color-neutral-600); /* Figma: Neutrals/600 #353C4A */
+	--brand-toggle-background: var(--color-neutral-700); /* Figma: Neutrals/700 */
+	--brand-toggle-hover-background: var(--brand-selected-background); /* Not in FX-UI-Kit, kept for ToggleButton compat */
+	--brand-gradient-1: var(--canvas-primary); /* Figma: → Surface/canvas-primary */
+	--brand-gradient-2: var(--canvas-primary); /* Figma: → Surface/canvas-primary (dark) */
+	--brand-gradient-3: var(--shell-bg-primary); /* Figma: → Shell/shell-bg-primary */
+	--brand-gradient-4: rgba(23, 26, 32, 0.80); /* Figma: Neutrals/800 @ 80% */
+	--brand-gradient-5: rgba(23, 26, 32, 0.20); /* Figma: Neutrals/800 @ 20% */
+	--brand-gradient-6: rgba(23, 26, 32, 0.00); /* Figma: Neutrals/800 @ 0% */
+
+	/* Joule — NEW group, no previous equivalent */
+	--joule-background: var(--color-brand-purple); /* NEW — #5D36FF (same as light) */
+	--joule-background-light: var(--color-purple-800); /* NEW — #2C13AD */
+	--joule-background-area: var(--color-purple-950); /* Figma: Purples/950 */
+	--joule-background-area-2: var(--color-neutral-900);
+	--joule-hover-background: var(--color-purple-500); /* NEW — #7858FF */
+	--joule-hover-background-2: var(--color-purple-100); /* NEW — #E2D8FF */
+	--joule-pressed-background: var(--color-purple-400); /* NEW — #9B76FF */
+	--joule-foreground: var(--color-purple-indigo-new); /* Figma: Purple-Indigo-New */
+	--joule-pressed-foreground: var(--color-purple-400); /* NEW — #9B76FF */
+	--joule-logo-1: var(--color-purple-500); /* Figma: Purples/500 */
+	--joule-logo-2: var(--color-purple-100); /* Figma: Purples/100 */
+	--joule-icons: var(--color-purple-300);
+	--joule-gradient-color-1: var(--color-purple-200);
+	--joule-gradient-color-2: var(--color-purple-400);
+	--joule-gradient-color-3: var(--color-purple-500);
+	--joule-gradient-color-4: var(--color-purple-500);
+	--joule-gradient-foreground: var(--color-purple-900);
+
+	/* Surface — existing tokens, adding new ones */
+	--card-bg-primary-selected: var(--color-neutral-700); /* NEW — #2C313A */
+
+	/* Border — existing tokens, adding new ones */
+	--border-focus: var(--color-blue-400); /* NEW — #4DB1FF */
+	--border-focus-neutral: #FFFFFF; /* NEW — Figma: Neutrals/White */
+	--border-joule: var(--color-purple-400); /* NEW — #9B76FF */
+	--border-area: var(--color-purple-600); /* Figma: Purples/600-Base */
+	--border-toggle: var(--color-neutral-600); /* Figma: Neutrals/600 #353C4A */
+
+	/* Shell — RENAMED from "chrome-*", values identical */
+	--shell-fg-primary: var(--chrome-fg-primary); /* RENAMED — was --chrome-fg-primary, same value #354A5F */
+	--shell-bg-primary: var(--chrome-bg-primary); /* RENAMED — was --chrome-bg-primary, same value */
+	--shell-button-fg-default: var(--chrome-button-fg-default); /* RENAMED — was --chrome-button-fg-default, same value */
+	--shell-button-bg-selected: var(--chrome-button-bg-selected); /* RENAMED — was --chrome-button-bg-selected, same value */
+	--shell-button-fg-selected: var(--chrome-button-fg-selected); /* RENAMED — was --chrome-button-fg-selected, same value */
+
+	/* Neutral — NEW group, no previous equivalent */
+	--neutral-background-white: rgba(255, 255, 255, 0); /* NEW — transparent in dark */
+	--neutral-background-grey: var(--color-neutral-500); /* NEW — #636D83 */
+	--neutral-hover-background: rgba(253, 254, 255, 0.15); /* Figma: Neutrals/50 @ 15% opacity */
+	--neutral-hover-background-2: var(--color-neutral-800); /* NEW — #171A20 */
+	--neutral-pressed-background: rgba(226, 226, 233, 0); /* NEW — transparent in dark */
+	--neutral-pressed-background-2: var(--color-neutral-700); /* NEW — #2C313A */
+	--neutral-foreground-white: #FFFFFF; /* NEW — same in both themes */
+	--neutral-foreground-black: var(--color-neutral-100); /* NEW — #F0F2F4 */
+	--neutral-foreground-muted: var(--color-neutral-300); /* NEW — #B5BCCA */
+	--neutral-foreground-muted-pressed: var(--color-neutral-200); /* NEW — #E6E7EA */
+	--neutral-overlay: rgba(0,0,0,0.50); /* Figma: Neutral overlay (dark) */
+
+	/* ============================================
+	 * Accent Colors — Figma "Theme Sapphire" (2026-04-16)
+	 * ============================================ */
+	--accent-1: #FFDF72;
+	--accent-bg-1: #AE4000;
+	--accent-2: #FF8CB2;
+	--accent-bg-2: #890506;
+	--accent-3: #FECBDA;
+	--accent-bg-3: #B40569;
+	--accent-4: #FFAFED;
+	--accent-bg-4: #8700B8;
+	--accent-5: #D3B6FF;
+	--accent-bg-5: #470CF1;
+	--accent-6: #A6E0FF;
+	--accent-bg-6: #0054CC;
+	--accent-7: #64EDD2;
+	--accent-bg-7: #036573;
+	--accent-8: #BDE986;
+	--accent-bg-8: #236C39;
+	--accent-9: #B995E0;
+	--accent-bg-9: #4E247A;
+	--accent-10: #D5DADD;
+	--accent-bg-10: #45617C;
+
+	/* ============================================
+	 * Illustrative Colors — Figma "Theme Sapphire" (2026-04-16)
+	 * ============================================ */
+	--illustrative-1: #9B015D;
+	--illustrative-2: #4D82B8;
+	--illustrative-3: #FF7F4C;
+	--illustrative-4: #688FB7;
+	--illustrative-5: #FFFFFF;
+	--illustrative-6: #818F98;
+	--illustrative-7: #101619;
+	--illustrative-8: #D5DADD;
+	--illustrative-9: #0899A7;
+	--illustrative-10: #EBF8FF;
+	--illustrative-11: #FA4F96;
+	--illustrative-12: #00A800;
+	--illustrative-13: #3B5B7C;
+	--illustrative-14: #2A4259;
+	--illustrative-15: #C35500;
+	--illustrative-16: #8D2A00;
+	--illustrative-17: #046C7C;
+	--illustrative-18: #2A4259;
+	--illustrative-19: #324E6B;
+	--illustrative-20: #222F3B;
+	--illustrative-21: #101619;
+	--illustrative-22: #00144A;
+	--illustrative-23: #D20A0A;
+	--illustrative-24: #D094B0;
+	--illustrative-25: #D0C1CB;
+	--illustrative-26: #D0B863;
+	--illustrative-27: #D0CDB3;
+	--illustrative-28: #A93E00;
+	--illustrative-29: #450B00;
+	--illustrative-30: #340800;
+	--illustrative-31: #FFAB92;
+
+	/* ============================================
+	 * Typography — Figma Sapphire Typescale
+	 * (same values in light and dark themes)
+	 * ============================================ */
+	--typo-heading1-size: 56px;
+	--typo-heading1-line-height: 64px;
+	--typo-heading1-weight: 300;
+
+	--typo-heading2-size: 40px;
+	--typo-heading2-line-height: 48px;
+	--typo-heading2-weight: 400;
+
+	--typo-heading3-size: 32px;
+	--typo-heading3-line-height: 40px;
+	--typo-heading3-weight: 400;
+
+	--typo-heading4-strong-size: 20px;
+	--typo-heading4-strong-line-height: 28px;
+	--typo-heading4-strong-weight: 600;
+
+	--typo-heading4-size: 20px;
+	--typo-heading4-line-height: 28px;
+	--typo-heading4-weight: 400;
+
+	--typo-title-strong-size: 16px;
+	--typo-title-strong-line-height: 24px;
+	--typo-title-strong-weight: 600;
+
+	--typo-title-size: 16px;
+	--typo-title-line-height: 24px;
+	--typo-title-weight: 400;
+
+	--typo-body-italic-size: 16px;
+	--typo-body-italic-line-height: 22px;
+	--typo-body-italic-weight: 400;
+
+	--typo-body-size: 14px;
+	--typo-body-line-height: 20px;
+	--typo-body-weight: 400;
+
+	--typo-body-strong-size: 14px;
+	--typo-body-strong-line-height: 20px;
+	--typo-body-strong-weight: 600;
+
+	--typo-caption-size: 12px;
+	--typo-caption-line-height: 16px;
+	--typo-caption-weight: 400;
+
+	--typo-caption-mono-size: 12px;
+	--typo-caption-mono-line-height: auto;
+	--typo-caption-mono-weight: 400;
+	--typo-caption-mono-tracking: -0.5px;
+}

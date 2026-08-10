@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FX Components</title>
+    <script>
+      (function () {
+        var key = 'fx-theme';
+        var known = ['dark','slate','rose','green','orange','violet','fiori','cyberpunk','ocean','sunset','forest','terminal','royal','blossom','aurora','desert','neon'];
+        try {
+          var stored = localStorage.getItem(key);
+          var id = stored;
+          if (stored === 'system') {
+            id = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : '';
+          }
+          if (id && known.indexOf(id) !== -1) {
+            document.documentElement.classList.add('theme-' + id);
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,178 @@
+apiVersion: project-piper.io/v1
+kind: PipelineDefinition
+metadata:
+  name: sap-piper.ci.no-promote-release
+  displayName: CI pipeline – all stages except Promote and Release
+spec:
+  stages:
+    - name: build
+      displayName: Build
+      steps:
+        - name: artifactPrepareVersion
+          orchestrators:
+            - GitHubActions
+        - name: gcpPublishEvent
+          orchestrators:
+            - GitHubActions
+          conditions:
+            - config:
+                vaultNamespace:
+                  - "ies/hyperspace/pipelines"
+                  - "hpp/portal"
+        - name: sapCallStagingService
+        - name: npmExecuteScripts
+          conditions:
+            - config:
+                buildTool:
+                  - 'npm'
+        - name: sonarExecuteScan
+          conditions:
+            - filePattern: '**/sonar-project.properties'
+        - name: sapCumulusUpload
+          conditions:
+            - configKey: pipelineId
+
+    - name: integration
+      displayName: Integration
+      steps:
+        - name: mavenExecuteIntegration
+          conditions:
+            - filePattern: 'integration-tests/pom.xml'
+        - name: sapCumulusUpload
+          conditions:
+            - configKey: pipelineId
+          orchestrators:
+            - GitHubActions
+
+    - name: acceptance
+      displayName: Acceptance
+      steps:
+        - name: sapDownloadArtifact
+          conditions:
+            - config:
+                nativeBuild:
+                  - true
+            - pipelineEnvironmentFilled: custom/helmChartURL
+          orchestrators:
+            - GitHubActions
+        - name: cloudFoundryDeploy
+          conditions:
+            - configKey: cfSpace
+            - configKey: cloudFoundry/space
+        - name: kubernetesDeploy
+          conditions:
+            - config:
+                deployTool:
+                  - 'helm'
+                  - 'helm3'
+                  - 'kubectl'
+        - name: newmanExecute
+          conditions:
+            - filePatternFromConfig: newmanCollection
+            - configKey: testRepository
+        - name: uiVeri5ExecuteTests
+          conditions:
+            - filePattern: '**/conf.js'
+            - configKey: testRepository
+        - name: gaugeExecuteTests
+          conditions:
+            - filePattern: '**/*.spec'
+            - configKey: testRepository
+        - name: npmExecuteEndToEndTests
+          conditions:
+            - configKey: appUrls
+          orchestrators:
+            - Jenkins
+        - name: sapCumulusUpload
+          conditions:
+            - configKey: pipelineId
+          orchestrators:
+            - GitHubActions
+
+    - name: performance
+      displayName: Performance
+      steps:
+        - name: sapDownloadArtifact
+          conditions:
+            - config:
+                nativeBuild:
+                  - true
+            - pipelineEnvironmentFilled: custom/helmChartURL
+          orchestrators:
+            - GitHubActions
+        - name: cloudFoundryDeploy
+          conditions:
+            - configKey: cfSpace
+            - configKey: cloudFoundry/space
+        - name: kubernetesDeploy
+          conditions:
+            - config:
+                deployTool:
+                  - 'helm'
+                  - 'helm3'
+                  - 'kubectl'
+        - name: gatlingExecuteTests
+          conditions:
+            - filePatternFromConfig: 'pomPath'
+          orchestrators:
+            - Jenkins
+        - name: sapCumulusUpload
+          conditions:
+            - configKey: pipelineId
+          orchestrators:
+            - GitHubActions
+
+    - name: security
+      displayName: Security
+      steps:
+        - name: checkmarxExecuteScan
+          conditions:
+            - configKey: projectName
+            - configKey: checkmarxProject
+            - configKey: checkMarxProjectName
+        - name: checkmarxOneExecuteScan
+          conditions:
+            - configKey: projectName
+        - name: fortifyExecuteScan
+          conditions:
+            - configKey: fortifyCredentialsId
+            - configKey: projectName
+            - configKey: fortifyProjectName
+        - name: detectExecuteScan
+          conditions:
+            - configKey: projectName
+        - name: whitesourceExecuteScan
+          conditions:
+            - configKey: productName
+            - configKey: whitesourceProductName
+        - name: sapCumulusUpload
+          conditions:
+            - configKey: pipelineId
+          orchestrators:
+            - GitHubActions
+
+    # Promote and Release stages are intentionally omitted
+
+    - name: post
+      displayName: Post
+      steps:
+        - name: sapReportPipelineStatus
+        # Publishes sap.hyperspace.pipelineRunFinished which Cumulus uses to
+        # advance the pipeline run's execution status from INITIALIZED to a
+        # terminal state. Without this, the Sirius pipeline-dashboard keeps
+        # showing the run as "Pipeline is currently running" even though all
+        # GitHub Actions jobs have completed — because Cumulus never receives
+        # the "finished" lifecycle event. The default Piper Post stage runs
+        # this step; we have to opt into it explicitly here because this file
+        # overrides the active-steps map.
+        - name: gcpPublishEvent
+          orchestrators:
+            - GitHubActions
+          conditions:
+            - config:
+                vaultNamespace:
+                  - "ies/hyperspace/pipelines"
+                  - "hpp/portal"
+        - name: sapCumulusUpload
+          conditions:
+            - configKey: pipelineId

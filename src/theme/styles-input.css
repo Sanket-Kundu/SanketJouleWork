@@ -1,0 +1,50 @@
+/*
+ * Tailwind build input for generating pre-built CSS.
+ *
+ * Run: tailwindcss -i src/theme/styles-input.css -o dist/styles.css --minify
+ *
+ * Produces a complete, self-contained CSS file with:
+ *   - Tailwind base/reset + all utility classes used by components
+ *   - @theme token mappings (sapphire-* + shadcn utility classes)
+ *   - Default token values (:root, .theme-light, .theme-dark)
+ *   - Component-specific non-Tailwind CSS
+ *   - Body defaults
+ *
+ * Consumer usage:
+ *   @import "@sap-ui/fx-components/styles.css";
+ */
+
+@import "tailwindcss";
+
+/* Sapphire @theme tokens → generates sapphire-* utility classes */
+@import "./sapphire-theme.css";
+
+/* Default token values (light + dark) */
+@import "./tokens.css";
+
+/* Component CSS (non-Tailwind styles) */
+@import "../components/popover/Popover.css";
+@import "../components/tabs/Tab.css";
+@import "../components/Tabbar/Tabbar.css";
+@import "../components/dialog/Dialog.css";
+@import "../components/fx/FxLayout.css";
+@import "../components/fx/FxPaneHeader.css";
+@import "../components/illustrated-message/illustrated-message.css";
+@import "../components/switch/Switch.css";
+@import "../components/button/Button.css";
+@import "../components/split-button/SplitButton.css";
+@import "../components/segmented-button/SegmentedButton.css";
+@import "../components/skeleton/Skeleton.css";
+@import "../components/slider/Slider.css";
+
+/* Scan component source to discover which Tailwind classes to generate */
+@source "../components";
+
+/* Map Tailwind dark: variant to theme class (shadcn compatible) */
+@custom-variant dark (&:is(.dark *, .theme-dark *));
+
+body {
+  margin: 0;
+  background-color: var(--background);
+  color: var(--foreground);
+}

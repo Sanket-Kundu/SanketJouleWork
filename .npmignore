@@ -1,0 +1,28 @@
+# Source and config (not needed in published package)
+src/
+demos/
+docs/
+scripts/
+.github/
+.pipeline/
+
+# Config files
+tsconfig.json
+tsup.config.ts
+*.tsbuildinfo
+.editorconfig
+.gitignore
+CLAUDE.md
+PROJECT_STRUCTURE.md
+
+# Test/coverage
+coverage/
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+
+# Do NOT ignore dist/ — it contains the published build output

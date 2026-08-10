@@ -1,0 +1,22 @@
+/* Focus ring matching UI5 SAP Horizon style */
+.fx-tabbar-item {
+  position: relative;
+}
+
+.fx-tabbar-item:focus-within::before,
+.fx-tabbar-item:focus::before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 0;
+  right: 0;
+  bottom: 3px;
+  border: 2px solid var(--ring);
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.fx-tabbar-item [role="tab"]:focus {
+  outline: none;
+}

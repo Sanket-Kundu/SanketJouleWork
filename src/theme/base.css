@@ -1,0 +1,21 @@
+/*
+ * Base document styles.
+ *
+ * Applies the theme foreground/background tokens to `body` so that any
+ * element WITHOUT an explicit `text-*` / `bg-*` class inherits the correct
+ * color per theme. Without this, unstyled elements fall back to the browser
+ * default (black text) — invisible in light mode, but broken in dark mode
+ * where black text renders on a dark background.
+ *
+ * This rule ships built-in: it is part of the pre-built `styles.css` bundle
+ * (via styles-input.css) and is appended to `dist/theme.css` /
+ * `dist/theme-tokens.css` at build time (see the `build:theme` script).
+ * Consumers who import `theme.css` — the manual "write it by hand" setup and
+ * the `init` scaffold — therefore get it automatically, with no extra import.
+ */
+
+body {
+  margin: 0;
+  background-color: var(--background);
+  color: var(--foreground);
+}

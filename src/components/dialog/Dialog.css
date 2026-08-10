@@ -1,0 +1,57 @@
+/* Native dialog with Popover API backdrop styling */
+dialog[popover]::backdrop {
+  background: rgba(0, 0, 0, 0.2);
+  animation: fadeIn 200ms ease-in;
+}
+
+.theme-dark dialog[popover]::backdrop,
+.dark dialog[popover]::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+dialog[popover] {
+  padding: 0;
+  max-width: none;
+  margin: 0;
+  inset: unset;
+  position: fixed;
+}
+
+/* Ensure dialog is hidden when not open */
+dialog[popover]:not(:popover-open) {
+  display: none;
+}
+
+/* Dialog animation */
+dialog[popover]:popover-open {
+  animation: fadeIn 200ms ease-in;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--dialog-x)), calc(-50% + var(--dialog-y) - 10px)) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translate(calc(-50% + var(--dialog-x)), calc(-50% + var(--dialog-y))) scale(1);
+  }
+}
+
+/* Resize handle cursor — flips for RTL */
+.dialog-resize-handle {
+  cursor: se-resize;
+}
+
+:dir(rtl) .dialog-resize-handle {
+  cursor: sw-resize;
+}

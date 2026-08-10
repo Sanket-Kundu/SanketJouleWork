@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+dist-combined/
+*.tsbuildinfo
+
+# Generated files
+demos/demo/src/components/api-registry.generated.ts
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local env files
+.env
+.env.local
+.env.*.local
+
+# Vite
+*.local
+
+# Test coverage & reports
+coverage/
+test-reports/
+reports/
+junit/*

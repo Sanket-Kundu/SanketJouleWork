@@ -1,0 +1,49 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+# Black Duck Security scan using Synopsys Detect CLI.
+# Scans against the sap.blackducksoftware.com instance.
+
+name: CI Black Duck security scan
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  schedule:
+    - cron: '37 17 * * 6'
+
+jobs:
+  build:
+    runs-on: [ self-hosted ]
+    container:
+      image: dockerio.int.repositories.cloud.sap/devxci/mbtci-java11-node20
+    permissions:
+      contents: read
+      pull-requests: write
+      security-events: write
+      actions: read
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: "Download synopsys detect"
+        run: |
+          apt-get update && apt-get install -y --no-install-recommends ca-certificates curl
+          curl --silent -O https://detect.blackduck.com/detect10.sh
+
+      - name: "Run Scan"
+        run: |
+          bash ./detect10.sh \
+            --logging.level.detect=DEBUG \
+            --blackduck.url="${{ vars.BLACKDUCKSCA_URL }}" \
+            --blackduck.api.token=${{ secrets.BLACKDUCKSCA_TOKEN }} \
+            --blackduck.trust.cert=true \
+            --detect.project.name="@sap-ui/fx-components" \
+            --detect.project.version.name="1.0" \
+            --detect.project.user.groups="JOULE WORK FXUI COMPONENTS 1.0" \
+            --detect.npm.dependency.types.excluded=DEV \
+            --detect.blackduck.signature.scanner.arguments=--min-scan-interval=0 \

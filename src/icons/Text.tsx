@@ -1,0 +1,16 @@
+import React from "react";
+import { Icon } from "../components/icon/Icon";
+import type { IconProps, IconRef } from "../types/icon";
+
+const pathData = [
+  'M454 32q11 0 18.5 7.5T480 58v76q0 11-7.5 18.5T454 160t-18-7.5-7-18.5V83H282v346h44q11 0 18.5 7t7.5 18-7.5 18.5T326 480H186q-11 0-18.5-7.5T160 454t7.5-18 18.5-7h44V83H83v51q0 11-7 18.5T58 160t-18.5-7.5T32 134V58q0-11 7.5-18.5T58 32h396z'
+] as const;
+
+type TextIconProps = Omit<IconProps, "pathData">;
+
+export const TextIcon = Object.assign(
+  React.forwardRef<IconRef, TextIconProps>(
+    (props, ref) => <Icon ref={ref} pathData={pathData} {...props} />
+  ),
+  { displayName: "TextIcon", iconName: "text" as const }
+);

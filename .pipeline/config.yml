@@ -1,0 +1,48 @@
+general:
+  buildTool: 'npm'
+  productiveBranch: 'main'
+  vaultPath: 'piper/sap-project-sap-ui'
+  vaultBasePath: 'piper/sap-project-sap-ui'
+  vaultPipelineName: 'fx-components'
+  vaultServerUrl: 'https://vault.tools.sap'
+  vaultNamespace: 'ies/hyperspace/pipelines'
+  nativeBuild: true
+stages:
+  Release:
+    sapDownloadArtifact: false
+    githubPublishRelease: true
+  Post:
+    # Secret rotation handled by Hyperspace Portal, enabling it back might cause unintended behavior
+    vaultRotateSecretId: false
+  Security:
+    checkmarxOneExecuteScan: false
+steps:
+  npmExecuteScripts:
+    buildDescriptorExcludeList: ["demos/demo/package.json", "demos/el-demo/package.json"]
+    runScripts: ["build", "lint:ci", "test:ci"]
+  artifactPrepareVersion:
+    versioningType: 'library' # Disable cloud versioning, use manual version from package.json
+  sapCallStagingService:
+    url: 'https://staging.repositories.cloud.sap/stage/api'
+    profile: 'group-sap-sap-ui-project-default'
+  sapCumulusUpload:
+    pipelineId: '43eebf59-aae1-4fde-aa5c-c55971e5d569'
+  sonarExecuteScan:
+    serverUrl: 'https://sonar.tools.sap'
+  githubPublishRelease:
+    # Creates the git tag and a GitHub Release on github.tools.sap; this is
+    # the step that flips Piper's releaseStatus from "promoted" to "released".
+    # `version` is sourced automatically from commonPipelineEnvironment.artifactVersion
+    # (populated by artifactPrepareVersion in library mode from package.json).
+    # `token` is supplied by the reusable Piper workflow as ${{ github.token }}.
+    owner: 'ui'
+    repository: 'fx-components'
+    tagPrefix: 'v'
+    apiUrl: 'https://github.tools.sap/api/v3'
+    serverUrl: 'https://github.tools.sap'
+    uploadUrl: 'https://github.tools.sap/api/uploads'
+    addDeltaToLastRelease: true
+  checkmarxOneExecuteScan:
+    projectId: '236c4b78-5581-436c-9590-04d3880448f9'
+    preset: 'SAP_Corp_JavaScript'
+    filterPattern: '!**/node_modules/**, !**/.jenkins/**, !**/.pipeline/**, !**/.vscode/**, !**/config/**, !**/docs/**, !**/reports/**, !**/coverage/**, !**/cypress/**, !**/.nyc_output/**, !**/junit/**, !**/templates/**, !**/test/**, !**/tools/**, !**/dist/**, !**/demos/**, **/*.ts, **/*.js'

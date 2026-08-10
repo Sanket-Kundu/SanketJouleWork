@@ -1,0 +1,16 @@
+import React from "react";
+import { Icon } from "../components/icon/Icon";
+import type { IconProps, IconRef } from "../types/icon";
+
+const pathData = [
+  'M454 32q11 0 18.5 7.5T480 58v396q0 11-7.5 18.5T454 480t-18-7.5-7-18.5V58q0-11 7-18.5t18-7.5zM262 96q11 0 18.5 7.5T288 122v332q0 11-7.5 18.5T262 480t-18-7.5-7-18.5V122q0-11 7-18.5t18-7.5zm96 64q11 0 18.5 7.5T384 186v268q0 11-7.5 18.5T358 480t-18-7.5-7-18.5V186q0-11 7-18.5t18-7.5zm-198 64q14 0 23 9t9 23-9 23-23 9-23-9-9-23 9-23 23-9zm-96 96q14 0 23 9t9 23-9 23-23 9-23-9-9-23 9-23 23-9zm96 0q14 0 23 9t9 23-9 23-23 9-23-9-9-23 9-23 23-9zm-96 96q14 0 23 9t9 23-9 23-23 9-23-9-9-23 9-23 23-9zm96 0q14 0 23 9t9 23-9 23-23 9-23-9-9-23 9-23 23-9z'
+] as const;
+
+type FilterAnalyticsIconProps = Omit<IconProps, "pathData">;
+
+export const FilterAnalyticsIcon = Object.assign(
+  React.forwardRef<IconRef, FilterAnalyticsIconProps>(
+    (props, ref) => <Icon ref={ref} pathData={pathData} {...props} />
+  ),
+  { displayName: "FilterAnalyticsIcon", iconName: "filter-analytics" as const }
+);

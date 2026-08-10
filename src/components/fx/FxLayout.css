@@ -1,0 +1,108 @@
+/* FxLayout scrollbar styles */
+
+/* Pane content scrollbar styling */
+.fx-pane-content {
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* Standard CSS scrollbar (Firefox, Chrome 121+) */
+  scrollbar-color: var(--color-neutral-400) transparent;
+  scrollbar-width: thin;
+}
+
+/* WebKit scrollbar styling (Safari, older Chrome) */
+.fx-pane-content::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.fx-pane-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.fx-pane-content::-webkit-scrollbar-thumb {
+  background: var(--color-neutral-400);
+  border-radius: 0.25rem;
+}
+
+.fx-pane-content::-webkit-scrollbar-thumb:hover {
+  background: var(--color-neutral-500);
+}
+
+/* Navigation scrollbar styling */
+.fx-nav-content {
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-color: var(--color-neutral-400) transparent;
+  scrollbar-width: thin;
+}
+
+.fx-nav-content::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.fx-nav-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.fx-nav-content::-webkit-scrollbar-thumb {
+  background: var(--color-neutral-400);
+  border-radius: 0.25rem;
+}
+
+.fx-nav-content::-webkit-scrollbar-thumb:hover {
+  background: var(--color-neutral-500);
+}
+
+/* Shadow on right edge of sidenav, fading inward to the left */
+.fx-sidenav-shadow::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 24px;
+  pointer-events: none;
+  z-index: 5;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.045) 0%, rgba(0, 0, 0, 0.025) 25%, rgba(0, 0, 0, 0.01) 55%, transparent 100%);
+}
+
+.theme-dark .fx-sidenav-shadow::after,
+[data-theme="dark"] .fx-sidenav-shadow::after {
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.025) 55%, transparent 100%);
+}
+
+/* Navigation dialog animations (compact mode) */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutToLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}

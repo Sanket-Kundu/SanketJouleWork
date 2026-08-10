@@ -1,0 +1,10 @@
+{
+	"backlogIds": ["EL"],
+	"configurationGroupId": "cbc137c1-4c51-4b8c-aa8d-70dc5743d1c4",
+	"jiraComponentPipelineMappings": [
+		{
+			"component": "EL_Tech Foundations",
+			"pipelineKeys": ["sap-ui-fx-components-2026-03-26"]
+		}
+	]
+}

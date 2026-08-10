@@ -1,0 +1,22 @@
+name: Piper CI
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  piper:
+    # Skip the bump commit pushed by release.yaml ("chore(release): vX.Y.Z").
+    # That commit also triggers the manually-dispatched `Piper` workflow which
+    # reports to Cumulus with the same cumulusPipelineRunKey (the commit SHA).
+    # Without this guard both runs race to call sapReportPipelineStatus and
+    # Sirius ends up connected to whichever finished first — usually Piper CI,
+    # not the release run. See PR #582 for context.
+    if: "!startsWith(github.event.head_commit.message, 'chore(release):')"
+    uses: "project-piper/piper-pipeline-github/.github/workflows/sap-piper-workflow.yml@v1"
+    secrets: inherit
+    permissions:
+      contents: write
+      id-token: write
+    with:
+      custom-stage-conditions-path: ".pipeline/stage-conditions-ci.yml"

@@ -1,0 +1,47 @@
+/* FxPaneHeader styles */
+
+/* Container query for small-screen behavior in edit mode */
+/* When the header is under 600px wide and in edit mode, hide all buttons except title */
+@container (max-width: 599px) {
+  /* Hide all buttons in edit mode */
+  .fx-pane-header--title-edit-mode .fx-pane-header-toggle-start,
+  .fx-pane-header--title-edit-mode .fx-pane-header-toggle-end,
+  .fx-pane-header--title-edit-mode .fx-pane-header-hamburger,
+  .fx-pane-header--title-edit-mode .fx-pane-header-back,
+  .fx-pane-header--title-edit-mode .fx-pane-header-overflow,
+  .fx-pane-header--title-edit-mode .fx-pane-header-relations,
+  .fx-pane-header--title-edit-mode .fx-pane-header-action,
+  .fx-pane-header--title-edit-mode .fx-pane-header-close {
+    display: none !important;
+  }
+
+  /* Let the title area take full width in edit mode */
+  .fx-pane-header--title-edit-mode .fx-pane-header-end-section {
+    display: none !important;
+  }
+}
+
+/* 3-zone centering layout */
+.fx-pane-header-left-zone {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  /* No gap here - spacing handled by nested groups with gap-1 and ml-sapphire-s */
+  min-width: 0;
+  justify-content: flex-start;
+}
+
+.fx-pane-header-center-zone {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fx-pane-header-right-zone {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  /* No gap here - spacing handled by nested groups with gap-1 and ml-sapphire-s */
+  justify-content: flex-end;
+}

@@ -1,0 +1,72 @@
+/* Illustration theming — SAP Horizon (light) values.
+ * Source: @sap-theming/theming-base-content sap_horizon/css_variables.css
+ * Override any of these at any CSS scope to customize illustration colors.
+ */
+:root {
+  --sapContent_Illustrative_Color1: #9b015d;
+  --sapContent_Illustrative_Color2: #56bdff;
+  --sapContent_Illustrative_Color3: #ff7f4c;
+  --sapContent_Illustrative_Color4: #00144a;
+  --sapContent_Illustrative_Color5: #a9b4be;
+  --sapContent_Illustrative_Color6: #d5dadd;
+  --sapContent_Illustrative_Color7: #dbf1ff;
+  --sapContent_Illustrative_Color8: #fff;
+  --sapContent_Illustrative_Color9: #0899a7;
+  --sapContent_Illustrative_Color10: #dbf1ff;
+  --sapContent_Illustrative_Color11: #df1278;
+  --sapContent_Illustrative_Color12: #00a800;
+  --sapContent_Illustrative_Color13: #0070f2;
+  --sapContent_Illustrative_Color14: #0040b0;
+  --sapContent_Illustrative_Color15: #c35500;
+  --sapContent_Illustrative_Color16: #8d2a00;
+  --sapContent_Illustrative_Color17: #046c7c;
+  --sapContent_Illustrative_Color18: #bce5ff;
+  --sapContent_Illustrative_Color19: #a3dbff;
+  --sapContent_Illustrative_Color20: #89d1ff;
+  --sapContent_Illustrative_Color21: #1b90ff;
+  --sapContent_Illustrative_Color22: #00144a;
+  --sapContent_Illustrative_Color23: #d20a0a;
+  --sapContent_Illustrative_Color24: #ffb2d2;
+  --sapContent_Illustrative_Color25: #ffeaf4;
+  --sapContent_Illustrative_Color26: #ffdf72;
+  --sapContent_Illustrative_Color27: #fff8d6;
+  --sapContent_Illustrative_Color28: #a93e00;
+  --sapContent_Illustrative_Color29: #450b00;
+  --sapContent_Illustrative_Color30: #340800;
+  --sapContent_Illustrative_Color31: #ffab92;
+
+  /* Semantic aliases (mapped by IllustratedMessage-parameters.css in UI5) */
+  --sapIllus_BrandColorPrimary: var(--sapContent_Illustrative_Color1);
+  --sapIllus_BrandColorSecondary: var(--sapContent_Illustrative_Color2);
+  --sapIllus_AccentColor: var(--sapContent_Illustrative_Color3);
+  --sapIllus_StrokeDetailColor: var(--sapContent_Illustrative_Color4);
+  --sapIllus_Layering1: var(--sapContent_Illustrative_Color5);
+  --sapIllus_Layering2: var(--sapContent_Illustrative_Color6);
+  --sapIllus_BackgroundColor: var(--sapContent_Illustrative_Color7);
+  --sapIllus_ObjectFillColor: var(--sapContent_Illustrative_Color8);
+  --sapIllus_NoColor: none;
+  --sapIllus_PatternShadow: url(#sapIllus_PatternShadow);
+  --sapIllus_PatternHighlight: url(#sapIllus_PatternHighlight);
+}
+
+/* Class-to-fill mappings (used by SVG illustrations via className) */
+.sapIllus_BrandColorPrimary { fill: var(--sapIllus_BrandColorPrimary); }
+.sapIllus_BrandColorSecondary { fill: var(--sapIllus_BrandColorSecondary); }
+.sapIllus_AccentColor { fill: var(--sapIllus_AccentColor); }
+.sapIllus_StrokeDetailColor { fill: var(--sapIllus_StrokeDetailColor); }
+.sapIllus_Layering1 { fill: var(--sapIllus_Layering1); }
+.sapIllus_Layering2 { fill: var(--sapIllus_Layering2); }
+.sapIllus_BackgroundColor { fill: var(--sapIllus_BackgroundColor); }
+.sapIllus_ObjectFillColor { fill: var(--sapIllus_ObjectFillColor); }
+.sapIllus_NoColor { fill: var(--sapIllus_NoColor); }
+.sapIllus_PatternShadow { fill: var(--sapIllus_PatternShadow); }
+.sapIllus_PatternHighlight { fill: var(--sapIllus_PatternHighlight); }
+
+/* Additional fill variants (used in SVG pattern defs) */
+.sapIllus_NoColor_Fill { fill: var(--sapIllus_NoColor); }
+.sapIllus_BrandColorPrimary_Fill { fill: var(--sapIllus_BrandColorPrimary); }
+.sapIllus_ObjectFillColor_Fill { fill: var(--sapIllus_ObjectFillColor); }
+
+/* SVG blend and mask modes */
+.sapIllus_BlendModeMultiply { mix-blend-mode: multiply; }
+.sapIllus_MaskTypeAlpha { mask-type: alpha; }

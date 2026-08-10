@@ -1,0 +1,44 @@
+/* ±30% translateY on a 600%-tall element = ±180% of parent, sweeping the band fully across */
+@keyframes skeleton-shimmer {
+  0% {
+    transform: translateY(-30%);
+  }
+  100% {
+    transform: translateY(30%);
+  }
+}
+
+.skeleton-shimmer {
+  --_skeleton-shape-bg: rgba(225, 225, 225, 0.2);
+  --_skeleton-shimmer-color: rgba(153, 153, 153, 0.12);
+  position: relative;
+  overflow: hidden;
+  background-color: var(--_skeleton-shape-bg);
+}
+
+:is(.theme-dark, .dark) .skeleton-shimmer {
+  --_skeleton-shape-bg: rgba(255, 255, 255, 0.06);
+  --_skeleton-shimmer-color: rgba(255, 255, 255, 0.04);
+}
+
+.skeleton-shimmer::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -250%;
+  height: 600%;
+  background: linear-gradient(
+    180deg,
+    transparent 30%,
+    var(--_skeleton-shimmer-color) 50%,
+    transparent 70%
+  );
+  animation: skeleton-shimmer 2.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-shimmer::after {
+    animation: none;
+  }
+}

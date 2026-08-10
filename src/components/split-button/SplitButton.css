@@ -1,0 +1,87 @@
+/* ── Container focus (Tab / keyboard) ────────────────────────────────────── */
+/* ::after at z-20 sits above inner button hover backgrounds (z-10).       */
+/* Extends to border-box (inset: -1px) so the 2px ring fully replaces the  */
+/* border, which becomes transparent on focus.                              */
+
+.split-btn-focus::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  pointer-events: none;
+  z-index: 20;
+  opacity: 0;
+}
+
+.split-btn-focus:focus-visible::after {
+  opacity: 1;
+}
+
+/* Radius matches container outer radius */
+.split-btn-focus-lg::after { border-radius: 8px; }
+.split-btn-focus-md::after { border-radius: 4px; }
+.split-btn-focus-sm::after { border-radius: 4px; }
+
+/* Non-filled: hide border, 2px ring replaces it */
+.split-btn-focus-brand:focus-visible {
+  border-color: transparent;
+}
+.split-btn-focus-brand:focus-visible::after {
+  box-shadow: inset 0 0 0 2px var(--color-ring);
+}
+
+.split-btn-focus-joule:focus-visible {
+  border-color: transparent;
+}
+.split-btn-focus-joule:focus-visible::after {
+  box-shadow: inset 0 0 0 2px var(--color-sapphire-border-joule);
+}
+
+.split-btn-focus-neutral:focus-visible {
+  border-color: transparent;
+}
+.split-btn-focus-neutral:focus-visible::after {
+  box-shadow: inset 0 0 0 2px var(--color-foreground);
+}
+
+/* Filled: inset ring + white ring inside */
+.split-btn-focus-filled-brand:focus-visible::after {
+  box-shadow: inset 0 0 0 2px var(--color-sapphire-border-focus), inset 0 0 0 3px #fff;
+}
+.split-btn-focus-filled-joule:focus-visible::after {
+  box-shadow: inset 0 0 0 2px var(--color-sapphire-border-joule), inset 0 0 0 3px #fff;
+}
+
+/* ── Inner button focus (mouse click) ────────────────────────────────────── */
+/* Full rounded-rect ring inside each sub-button, inset to clear separator  */
+
+.split-btn-inner::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  pointer-events: none;
+  z-index: 30;
+  opacity: 0;
+}
+
+.split-btn-inner:focus::before {
+  opacity: 1;
+}
+
+/* Size-dependent radius for inner focus ring */
+.split-btn-inner-lg::before { border-radius: 6px; }
+.split-btn-inner-md::before { border-radius: 2px; }
+.split-btn-inner-sm::before { border-radius: 2px; }
+
+/* Color variants */
+.split-btn-inner-brand:focus::before {
+  box-shadow: inset 0 0 0 1.5px var(--color-ring);
+}
+.split-btn-inner-joule:focus::before {
+  box-shadow: inset 0 0 0 1.5px var(--color-sapphire-border-joule);
+}
+.split-btn-inner-neutral:focus::before {
+  box-shadow: inset 0 0 0 1.5px var(--color-foreground);
+}
+.split-btn-inner-white:focus::before {
+  box-shadow: inset 0 0 0 1.5px #fff;
+}

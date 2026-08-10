@@ -1,0 +1,87 @@
+/* SAP 72 Font Family - Local */
+@import url('/fonts/72.css');
+
+@import "tailwindcss";
+
+/* Sapphire theme tokens (Tailwind v4 @theme) */
+@import "../../../src/theme/sapphire-theme.css";
+
+/* Sapphire preset - default light/dark token values */
+@import "../../../src/theme/tokens.css";
+
+/* Override Tailwind's dark: variant to use our theme class instead of OS preference */
+@custom-variant dark (&:where(.theme-dark, .theme-dark *));
+
+/*
+ * Tailwind v4 - explicitly scan component library source files
+ */
+@source "../../../src";
+@source "../src";
+
+/* Mobile viewport fixes */
+html {
+  overflow: hidden;
+  /* Prevent overscroll/bounce on iOS */
+  overscroll-behavior: none;
+  /* Fixed dimensions to prevent any content from expanding viewport */
+  width: 100%;
+  height: 100%;
+  /* Prevent pinch zoom */
+  touch-action: pan-x pan-y;
+}
+
+body {
+  margin: 0;
+  font-family: '72', '72full', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background);
+  color: var(--foreground);
+  overflow: hidden;
+  /* Fixed dimensions */
+  width: 100%;
+  height: 100%;
+  /* Prevent overscroll/bounce on iOS */
+  overscroll-behavior: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Ensure form elements inherit font-family (browsers default to system fonts) */
+button, input, select, textarea {
+  font-family: inherit;
+}
+
+/* Subheader animation keyframes */
+@keyframes subheader-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes subheader-exit {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+}

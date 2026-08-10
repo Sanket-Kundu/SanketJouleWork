@@ -1,0 +1,36 @@
+name: postRelease
+description: |
+  Flip Piper's commonPipelineEnvironment.custom/releaseStatus from "promoted"
+  to "released" so the Post stage's sapGenerateEnvironmentInfo +
+  sapCumulusUpload emit a release-status JSON that marks the pipeline run as
+  released in Cumulus.
+
+  Background: githubPublishRelease creates the GitHub Release on the tag but
+  does NOT update commonPipelineEnvironment.custom/releaseStatus. Only a
+  deployment step (e.g. cloudFoundryDeploy) updates it automatically; for an
+  npm library with no deploy step we set it explicitly here.
+
+  Valid releaseStatus values: promoted, release-candidate,
+  deployed-to-production, released.
+  See: https://pages.github.tools.sap/project-piper/steps/sapGenerateEnvironmentInfo/#releasestatus
+       https://pages.github.tools.sap/Hyperspace-Documentation/cumulus/2--Getting-Started---Cumulus/2-6-Release-Status/Automatically-Set-Pipeline-Run-Release-Status-by-File-Upload/
+
+  Hook semantics: the reusable Release workflow only invokes this extension
+  on `success()` (post-extension-always is left at its default `false`), so
+  this runs only after every active Release step — notably
+  githubPublishRelease — succeeded.
+
+  continue-on-error: true keeps a hiccup in writePipelineEnv from failing
+  the Release job. If it does fail the GitHub Release still exists but
+  Cumulus stays at "promoted", which is recoverable manually and consistent
+  with the pre-extension behavior.
+
+runs:
+  using: composite
+  steps:
+    - name: Set release status to "released"
+      uses: piper/piper-action@497603ce53421a128a4b3fac5d87783bc46f3393 # v1.29
+      continue-on-error: true
+      with:
+        step-name: writePipelineEnv
+        flags: '--value custom/releaseStatus={"releaseStatus":"released","selectionType":"latest-delivery"}'

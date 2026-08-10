@@ -1,0 +1,8 @@
+---
+applications:
+  - name: shadcn-ui5-demo
+    routes:
+      - route: shadcn-ui5webc-demo.internal.cfapps.eu12.hana.ondemand.com
+    buildpack: staticfile_buildpack
+    memory: 64M
+    path: public

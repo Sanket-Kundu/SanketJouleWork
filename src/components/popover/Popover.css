@@ -1,0 +1,15 @@
+/* Reset browser popover defaults so our fixed positioning works.
+   Only reset inset and margin — leave background, border, padding
+   to be controlled by Tailwind classes on the element.
+   overflow: visible is needed so the arrow (positioned outside the
+   popover box with negative offsets) is not clipped by the browser's
+   default overflow:auto on top-layer elements. */
+div[popover] {
+  inset: unset;
+  margin: 0;
+  overflow: visible;
+}
+
+div[popover]:not(:popover-open) {
+  display: none;
+}

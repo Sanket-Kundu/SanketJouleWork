@@ -1,0 +1,99 @@
+/* Switch – state-driven track colors via CSS custom properties
+ * Aligned to Sapphire Workfile spec (node 11986:61958 light, 11986:62032 dark)
+ */
+
+.fx-switch {
+  --_switch-bg: var(--neutral-background-grey);
+  --_switch-handle-bg: var(--canvas-primary);
+  --_switch-handle-border: transparent;
+  min-width: 32px;
+  flex-shrink: 0;
+}
+
+/* ============================================
+ * Light: Unchecked states
+ * ============================================ */
+.fx-switch:hover:not(:disabled) {
+  --_switch-bg: var(--color-neutral-400);
+  --_switch-handle-bg: var(--background-tertiary);
+  --_switch-handle-border: var(--neutral-foreground-muted);
+}
+.fx-switch:active:not(:disabled) {
+  --_switch-bg: var(--neutral-foreground-muted);
+  --_switch-handle-bg: var(--background-tertiary);
+  --_switch-handle-border: var(--neutral-foreground-muted-pressed);
+}
+.fx-switch:focus:not(:disabled) {
+  --_switch-handle-border: var(--neutral-foreground-muted-pressed);
+  outline: 2px solid var(--border-focus-neutral);
+  outline-offset: -1px;
+  box-shadow: inset 0 0 0 2px var(--neutral-foreground-white);
+}
+.fx-switch:disabled {
+  --_switch-bg: var(--neutral-background-grey);
+  --_switch-handle-bg: var(--canvas-primary);
+  --_switch-handle-border: transparent;
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ============================================
+ * Light: Checked states
+ * ============================================ */
+.fx-switch[aria-checked="true"] {
+  --_switch-bg: var(--brand-background);
+  --_switch-handle-bg: var(--canvas-primary);
+  --_switch-handle-border: transparent;
+}
+.fx-switch[aria-checked="true"]:hover:not(:disabled) {
+  --_switch-bg: var(--brand-hover-background);
+  --_switch-handle-bg: var(--background-tertiary);
+  --_switch-handle-border: var(--brand-pressed-background);
+}
+.fx-switch[aria-checked="true"]:active:not(:disabled) {
+  --_switch-bg: var(--brand-pressed-background);
+  --_switch-handle-bg: var(--background-tertiary);
+  --_switch-handle-border: var(--neutral-foreground-black);
+}
+.fx-switch[aria-checked="true"]:focus:not(:disabled) {
+  --_switch-handle-border: transparent;
+  outline: 2px solid var(--border-focus);
+  outline-offset: -1px;
+  box-shadow: inset 0 0 0 2px var(--neutral-foreground-white);
+}
+.fx-switch[aria-checked="true"]:disabled {
+  --_switch-bg: var(--brand-background);
+  --_switch-handle-bg: var(--canvas-primary);
+  --_switch-handle-border: transparent;
+  opacity: 0.4;
+}
+
+/* ============================================
+ * Dark: Unchecked overrides
+ * (only raw palette values that don't auto-flip)
+ * ============================================ */
+.theme-dark .fx-switch:not([aria-checked="true"]),
+.dark .fx-switch:not([aria-checked="true"]) {
+  --_switch-bg: var(--color-neutral-500);
+}
+.theme-dark .fx-switch:not([aria-checked="true"]):hover:not(:disabled),
+.dark .fx-switch:not([aria-checked="true"]):hover:not(:disabled) {
+  --_switch-bg: var(--color-neutral-400);
+  --_switch-handle-border: var(--color-neutral-300);
+}
+.theme-dark .fx-switch:not([aria-checked="true"]):active:not(:disabled),
+.dark .fx-switch:not([aria-checked="true"]):active:not(:disabled) {
+  --_switch-bg: var(--color-neutral-300);
+  --_switch-handle-border: var(--color-neutral-300);
+}
+
+/* ============================================
+ * Dark: Checked overrides
+ * (handle border is blue-400 on hover/active)
+ * ============================================ */
+.theme-dark .fx-switch[aria-checked="true"]:hover:not(:disabled),
+.dark .fx-switch[aria-checked="true"]:hover:not(:disabled),
+.theme-dark .fx-switch[aria-checked="true"]:active:not(:disabled),
+.dark .fx-switch[aria-checked="true"]:active:not(:disabled) {
+  --_switch-handle-border: var(--color-blue-400);
+}

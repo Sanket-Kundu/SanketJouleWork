@@ -1,0 +1,49 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: [ self-hosted, solinas ]
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          clean: true
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Install demo dependencies
+        run: |
+          npm --prefix demos/demo ci
+          npm --prefix demos/el-demo ci
+
+      - run: npm run type-check
+
+      - run: npm run generate:api-registry
+
+      - run: npm run build
+
+      - run: npm run build:demo
+
+      - run: npm run build:el-demo
+
+      - name: Combine app outputs
+        run: |
+          mkdir -p dist-combined/fx-layout
+          cp -r demos/demo/dist/* dist-combined/
+          cp -r demos/el-demo/dist/* dist-combined/fx-layout/
+
+      - name: Deploy to gh-pages
+        uses: JamesIves/github-pages-deploy-action@v4.7.6
+        with:
+          branch: gh-pages
+          folder: dist-combined
+          clean: true

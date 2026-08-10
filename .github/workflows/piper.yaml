@@ -1,0 +1,18 @@
+name: Piper
+on:
+  workflow_dispatch:
+
+jobs:
+  piper:
+    uses: "project-piper/piper-pipeline-github/.github/workflows/sap-piper-workflow.yml@v1"
+    secrets: inherit
+    permissions:
+      contents: write
+      id-token: write
+    with:
+      # Enable .pipeline/extensions/<hook>/action.yml hooks. We use this to
+      # run a postRelease extension that writes
+      # commonPipelineEnvironment.custom/releaseStatus = "released" so the
+      # Post stage's sapGenerateEnvironmentInfo emits the right value to
+      # Cumulus. See .pipeline/extensions/postRelease/action.yml.
+      extensibility-enabled: true

@@ -1,0 +1,129 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+
+# id-token: write is required by piper/system-trust-action's OIDC exchange in
+# the sonar job. Everything else only needs read.
+permissions:
+  contents: read
+  pull-requests: write
+  checks: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: [ self-hosted, solinas ]
+
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          clean: true
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Install demo dependencies
+        run: |
+          npm --prefix demos/demo ci
+          npm --prefix demos/el-demo ci
+
+      - run: npm run type-check
+
+      - run: npm run generate:api-registry
+
+      - run: npm run build
+
+      - run: npm run build:demo
+
+      - run: npm run build:el-demo
+
+      - run: npm run lint:ci
+
+      - run: npm run test:ci
+
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@d0a4676d0e0b938bc201470d88276b7c74c712b3 # v2
+        if: always()
+        with:
+          files: junit/TEST-results.xml
+
+      - name: Upload Coverage Report
+        # Pinned to @v3: upload-artifact@v4+ uses @actions/artifact v2.0.0+,
+        # which is not supported on GitHub Enterprise Server (github.tools.sap).
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3
+        if: always()
+        with:
+          name: coverage-report
+          path: coverage/
+
+      # Dedicated artifact consumed by the downstream sonar job.
+      # Only on success: a failed test run can leave coverage/lcov.info
+      # partial, which would silently degrade Sonar metrics.
+      - name: Upload coverage for SonarQube
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3
+        if: success()
+        with:
+          name: coverage
+          path: coverage/lcov.info
+          if-no-files-found: error
+
+  # Sample: https://github.tools.sap/piper/system-trust-action
+  sonar:
+    needs: [build]
+    if: ${{ needs.build.result == 'success' }}
+    runs-on: [self-hosted, solinas]
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      PIPER_ACTION_PIPER_VERSION: v1.509.0
+      PIPER_ACTION_SAP_PIPER_VERSION: '1.407.0'
+      PIPER_ACTION_SAP_PIPER_OWNER: project-piper
+      PIPER_ACTION_SAP_PIPER_REPOSITORY: sap-piper
+      PIPER_ACTION_GITHUB_ENTERPRISE_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          fetch-depth: 0
+
+      # Piper passes --changeTarget as -Dsonar.pullrequest.base=main to the
+      # scanner, and Sonar's SCM sensor needs `main` resolvable as a local
+      # ref to compute the new-code diff. `actions/checkout` on a pull_request
+      # event leaves us on the merge commit in detached HEAD with no local
+      # branch named `main`; fetch it explicitly so `git rev-parse main`
+      # succeeds and Sonar reports new lines / new issues / new coverage.
+      - name: Fetch PR base branch for Sonar new-code diff
+        run: git fetch --no-tags --depth=0 origin ${{ github.base_ref }}:${{ github.base_ref }} || git fetch origin ${{ github.base_ref }}
+
+      - name: Download coverage
+        uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3
+        with:
+          name: coverage
+          path: coverage
+
+      - name: Retrieve System Trust session token
+        uses: piper/system-trust-action@67f6982dce6c7fc8d78228dcee41b063857258c9
+        with:
+          pipeline-id: fx-components
+          pipeline-group-id: piper/sap-project-sap-ui
+
+      - name: sonarExecuteScan
+        uses: piper/piper-action@fd627261e77c39c43b4e857865f9a43f8bbffa02 # v1.28
+        with:
+          step-name: sonarExecuteScan
+          # Do NOT wrap head_ref / base_ref in single quotes: piper-action's
+          # Go arg-emitter keeps the quotes literal, so the scanner ends up
+          # looking for a ref named `'main'` (with quotes) and Sonar warns
+          # "Could not find ref ''main''", computing 0 new lines.
+          flags: >-
+            --changeId ${{ github.event.pull_request.number }}
+            --changeBranch ${{ github.head_ref }}
+            --changeTarget ${{ github.base_ref }}
+            --pullRequestProvider GitHub
+            --githubToken ${{ github.token }}
