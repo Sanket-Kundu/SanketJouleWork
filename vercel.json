@@ -1,5 +1,0 @@
-{
-  "buildCommand": "npm install && npm run build && cd demos/el-demo && npm install && npm run build",
-  "outputDirectory": "demos/el-demo/dist",
-  "framework": "vite"
-}

@@ -3,15 +3,22 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
-  deploy:
-    runs-on: [ self-hosted, solinas ]
-
+  build:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          clean: true
 
       - uses: actions/setup-node@v4
         with:
@@ -20,30 +27,26 @@ jobs:
 
       - run: npm ci
 
-      - name: Install demo dependencies
-        run: |
-          npm --prefix demos/demo ci
-          npm --prefix demos/el-demo ci
-
-      - run: npm run type-check
-
-      - run: npm run generate:api-registry
+      - name: Install el-demo dependencies
+        run: npm --prefix demos/el-demo ci
 
       - run: npm run build
 
-      - run: npm run build:demo
+      - name: Build el-demo
+        run: npm --prefix demos/el-demo run build
 
-      - run: npm run build:el-demo
-
-      - name: Combine app outputs
-        run: |
-          mkdir -p dist-combined/fx-layout
-          cp -r demos/demo/dist/* dist-combined/
-          cp -r demos/el-demo/dist/* dist-combined/fx-layout/
-
-      - name: Deploy to gh-pages
-        uses: JamesIves/github-pages-deploy-action@v4.7.6
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          branch: gh-pages
-          folder: dist-combined
-          clean: true
+          path: demos/el-demo/dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
