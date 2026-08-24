@@ -81,6 +81,7 @@ import { JobDetail } from './components/JobDetail';
 import { ProjectsList } from './components/ProjectsList';
 import { ProjectDetail } from './components/ProjectDetail';
 import { ChatPane } from './components/ChatPane';
+import { WorkflowJoulePane } from './components/WorkflowJoulePane';
 import { SettingsNav, settingsSections } from './components/SettingsNav';
 import { SettingsContent } from './components/SettingsContent';
 import { AINoticeDialog } from './components/AINoticeDialog';
@@ -318,7 +319,19 @@ export function App() {
         // Always show the list when start pane is visible (list is the start pane content)
         return <ConversationsList conversations={sortByName(filterByQuery(conversations))} selectedId={selectedItemId} onSelect={selectItem} />;
       case 'spaces':
-        return <SpacesList spaces={sortByName(filterByQuery(spaces))} selectedId={selectedItemId} onSelect={selectItem} />;
+        return (
+          <SpacesList
+            spaces={sortByName(filterByQuery(spaces))}
+            selectedId={selectedItemId}
+            onSelect={(id) => {
+              selectItem(id);
+              const s = spaces.find((sp) => sp.id === id);
+              if (s?.uiType === 'workflow-approvals') {
+                openEndPane('chat', id);
+              }
+            }}
+          />
+        );
       case 'jobs':
         return <JobsList jobs={filterByQuery(jobs)} selectedId={selectedItemId} onSelect={selectItem} />;
       case 'develop':
@@ -537,6 +550,15 @@ export function App() {
   // conversations: "Sources" pane with document references
   // spaces/jobs: "Joule" chat pane
   const renderEndContent = () => {
+    // Workflow approvals → show dedicated Joule pane (overrides generic chat)
+    if (
+      currentSection === 'spaces' &&
+      selectedItem &&
+      (selectedItem as Space).uiType === 'workflow-approvals'
+    ) {
+      return <WorkflowJoulePane />;
+    }
+
     if (endPaneContent.type === 'sources') {
       // Use the sourceCount passed when opening the pane, or default to 3
       const count = endPaneContent.sourceCount ?? 3;
